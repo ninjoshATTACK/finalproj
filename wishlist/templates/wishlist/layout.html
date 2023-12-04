@@ -1,0 +1,43 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Auctions{% endblock %}</title>
+        <link rel="stylesheet" type="text/css" href="https://cdn.simplecss.org/simple.css">
+        <link rel="stylesheet" type="text/css" href="{% static 'auctions/uaa490styles.css' %}" >
+</head>
+    <body>
+        <header>
+            <h1>Wishlist Central</h1>
+            <nav>
+                <span>
+                    <a href="{% url 'my-listings' %}">My Wishlist</a>
+                    <a href="{% url 'index' %}">Friends' Wishlists</a>
+                    <a href="{% url 'categories' %}">Secret Santa</a>
+                    <a href="{% url 'my-watchlist' %}">My Profile</a>
+                    <a href="{% url 'create-listing' %}">Add Friends</a>
+                </span>
+                <span>
+                    {% if user.is_authenticated %}
+                        Welcome <strong>{{ user.username }}!</strong>
+                        <a href="{% url 'logout' %}">Log Out</a>
+                    {% else %}
+                        <a href="{% url 'login' %}">Log In</a>
+                        <a href="{% url 'register' %}">Register</a>
+                    {% endif %}
+                </span>
+            </nav>
+        </header>
+        <main>
+            {% for m in messages %}
+                <h2 class="{{m.tags}}">{{m}}</h2>
+            {% endfor %}
+            {% block main %}
+            {% endblock %}
+        </main>
+
+     </body>
+</html>
