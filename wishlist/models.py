@@ -3,7 +3,7 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    birthday = models.DateField(blank=True)
+    birthday = models.DateField(blank=True, null=True)
     profile_pic = models.ImageField(blank=True)
     fname = models.CharField(blank=True, max_length=50)
     friends = models.ManyToManyField('User', blank=True)

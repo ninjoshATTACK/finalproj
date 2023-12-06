@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from .models import User, Friend_Request
 from .forms import UserCreateForm
 
-### Login Stuff ###
+### Login Stuff ###        #bug where it crashes if failed the first time, then tried again
 def login_view(request):
     if request.method == "POST":
 
@@ -46,7 +46,7 @@ def register(request):
                 password=form.cleaned_data['password1']
             )
             login(request, new_user)
-            return HttpResponse('LoggedIn') #redirect("index")
+            return redirect("index")
         else:
             print(request.POST, form.errors)
             return render(request, "wishlist/register.html", {
