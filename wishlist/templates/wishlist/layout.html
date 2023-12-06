@@ -14,11 +14,11 @@
             <h1>Wishlist Central</h1>
             <nav>
                 <span>
-                    <a href="{% url 'my-listings' %}">My Wishlist</a>
+                    <a href="{% url 'my-wishlist' %}">My Wishlist</a>
                     <a href="{% url 'index' %}">Friends' Wishlists</a>
-                    <a href="{% url 'categories' %}">Secret Santa</a>
-                    <a href="{% url 'my-watchlist' %}">My Profile</a>
-                    <a href="{% url 'create-listing' %}">Add Friends</a>
+                    <a href="{% url 'secret-santa' %}">Secret Santa</a>
+                    <a href="{% url 'my-profile' %}">My Profile</a>
+                    <a href="{% url 'add-friend' %}">Add Friends</a>
                 </span>
                 <span>
                     {% if user.is_authenticated %}

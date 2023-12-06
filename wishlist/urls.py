@@ -3,8 +3,19 @@ from django.views.generic.base import TemplateView
 
 from . import views
 
-urlpatters = [
+urlpatterns = [
     path("login", views.login_view, name="login"),
     path("logout", views.logout_view, name="logout"),
     path("register", views.register, name="register"),
+
+    path("add_friend", views.add_friend, name="add-friend"),
+    path("send_friend_request/<int:user_id>", 
+        views.send_friend_request, name="send-friend-request"),
+    path("accept_friend_request/<int:user_id>",
+        views.accept_friend_request, name="send-friend-request"),
+
+    path("", views.index, name="index"),
+    path("my_profile", views.my_profile, name="my-profile"),
+    path("my_wishlist", views.my_wishlist, name="my-wishlist"),
+    path("secret_santa", views.secret_santa, name="secret-santa"),
 ]
