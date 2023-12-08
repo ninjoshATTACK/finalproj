@@ -1,11 +1,11 @@
-from django.http import HttpResponse
-from django.shortcuts import render, redirect
+from django.http import HttpResponse, HttpResponseServerError
+from django.shortcuts import get_object_or_404, render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.contrib.auth.decorators import login_required
 
-from .models import User, Friend_Request
-from .forms import UserCreateForm
+from .models import User, Friend_Request, Profile
+from .forms import UserCreateForm, UpdateProfileForm, UpdateUserForm
 
 ### Login Stuff ###        #bug where it crashes if failed the first time, then tried again
 def login_view(request):
@@ -66,8 +66,27 @@ def index(request):
 
 ### My Profile ###
 @login_required(login_url='login')
-def my_profile(request):
-    pass
+def edit_profile(request):
+    if request.method == 'POST':
+        user_form = UpdateUserForm(request.POST, instance=request.user)
+        profile_form = UpdateProfileForm(request.POST, request.FILES, instance=request.user.profile)
+
+        if user_form.is_valid() and profile_form.is_valid():
+            user_form.save()
+            profile_form.save()
+            message = 'Your profile has been updated successfully'
+            return redirect('my_profile', message)
+        else:
+            return HttpResponseServerError(f'Unknown button clicked')
+    else:
+        user_form = UpdateUserForm(instance=request.user)
+        profile_form = UpdateProfileForm(instance=request.user.profile)
+
+        return render(request, "wishlist/edit_profile.html", {
+            'user_form': user_form,
+            'profile_form': profile_form,
+            'banner': 'Edit Profile'
+        })
 ##################
 
 ### Friend Requests ###
@@ -83,9 +102,9 @@ def send_friend_request(request, user_id):
         from_user=from_user, to_user=to_user
     )
     if created:
-        redirect("index", m='friend request sent')
+        return redirect("index", m='friend request sent')
     else:
-        redirect("index", m='friend request was already sent')
+        return redirect("index", m='friend request was already sent')
 
 @login_required(login_url='login')
 def accept_friend_request(request, request_id):
