@@ -10,7 +10,6 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField(default='default.jpg', upload_to='images/profile_images')
     fname = models.CharField(blank=True, max_length=50)
-    birthday = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return self.user.username
@@ -44,8 +43,10 @@ class Wishlist(models.Model):
     fav_drink = models.CharField(max_length=64)
     fav_candy = models.CharField(max_length=64)
     fav_animal = models.CharField(max_length=64)
-    fav_media = models.CharField(max_length=64)
-    fav_hobbie = models.CharField(max_length=64)
+    fav_media = models.CharField(max_length=64) #movie/tv/anime
+    fav_hobby = models.CharField(max_length=64)
     fav_book = models.CharField(max_length=64)
-    fav_music = models.CharField(max_length=64)
-    additional = models.TextField(max_length=500)
+    fav_game = models.CharField(max_length=64)
+    fav_music = models.CharField(max_length=64) #artist
+    
+    gift_ideas = models.TextField(max_length=500)

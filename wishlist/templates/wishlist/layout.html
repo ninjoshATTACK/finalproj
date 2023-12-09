@@ -14,9 +14,15 @@
             <h1>Wishlist Central</h1>
             <nav>
                 <span>
-                    <a href="{% url 'my-wishlist' %}">My Wishlist</a>
-                    <a href="{% url 'index' %}">Friends' Wishlists</a>
-                    <a href="{% url 'secret-santa' %}">Secret Santa</a>
+                    {% if user.is_authenticated %}
+                        {% if haslist %}
+                            <a href="{% url 'my-wishlist' %}">My Wishlist</a>
+                        {% else %}
+                            <a href="{% url 'create-wishlist' %}">Create Wishlist</a>
+                        {% endif %}
+                        <a href="{% url 'index' %}">Friends' Wishlists</a>
+                        <a href="{% url 'secret-santa' %}">Secret Santa</a>
+                    {% endif %}
                     
                 </span>
                 <span>

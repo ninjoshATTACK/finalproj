@@ -1,0 +1,37 @@
+{% extends "wishlist/layout.html" %}
+
+{% block main %}
+
+<h2>{{banner}}</h2>
+
+<article>
+    {% if wishlist %}
+        <div>
+            <h3>Favorites:</h3>
+            <ul class="favorites">
+                <li>Color: {{ wishlist.fav_color }}</li>
+                <li>Food: {{ wishlist.fav_food }}</li>
+                <li>Drink: {{ wishlist.fav_drink }}</li>
+                <li>Candy: {{ wishlist.fav_candy }}</li>
+                <li>animal: {{ wishlist.fav_animal }}</li>
+                <li>Movie/TV/Anime: {{ wishlist.fav_media }}</li>
+                <li>Hobby: {{ wishlist.fav_hobby }}</li>
+                <li>Book: {{ wishlist.fav_book }}</li>
+                <li>Game: {{ wishlist.fav_game }}</li>
+                <li>Music Artist: {{ wishlist.fav_music }}</li>
+            </ul>
+        </div>
+        <div>
+            <h3>Gift Ideas</h3>
+            <p>{{ wishlist.gift_ideas }}</p>
+        </div>
+    {% else %}
+    <div>
+        <h3>You currently don't have a wishlist.</h3>
+        <a href="{% url 'create-wishlist' %}">Create Wishlist</a>
+    </div>
+
+    {% endif %}
+</article>
+
+{% endblock %}

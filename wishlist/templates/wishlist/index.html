@@ -5,7 +5,38 @@
 <h2>{{banner}}</h2>
 
 <article>
-    test
+    {% if user.is_authenticated %}
+        {% for wishlist in wishlists %}
+            <section>
+                <h3>
+                    <a href="#">
+                        {% if wishlist.image %}
+                            <img src="{{ wishlist.image.url }}" width="50px">
+                        {% endif %}
+                        {{ wishlist.owner.username }}
+                    </a>
+                    <small>
+                        <h3>Favorites:</h3>
+                        <ul class="favorites">
+                            <li>Color: {{ wishlist.fav_color }}</li>
+                            <li>Food: {{ wishlist.fav_food }}</li>
+                            <li>Drink: {{ wishlist.fav_drink }}</li>
+                            <li>Candy: {{ wishlist.fav_candy }}</li>
+                            <li>animal: {{ wishlist.fav_animal }}</li>
+                            <li>Movie/TV/Anime: {{ wishlist.fav_media }}</li>
+                            <li>Hobby: {{ wishlist.fav_hobby }}</li>
+                            <li>Book: {{ wishlist.fav_book }}</li>
+                            <li>Game: {{ wishlist.fav_game }}</li>
+                            <li>Music Artist: {{ wishlist.fav_music }}</li>
+                        </ul>
+                    </small>
+                </h3>
+                <div class="gift-ideas">{{ wishlist.gift_ideas }}</div>
+            </section>
+        {% endfor %}
+    {% else %}
+        <section>Login/Register to see the wishlists.</section>
+    {% endif %}
 </article>
 
 {% endblock %}
