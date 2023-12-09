@@ -20,7 +20,6 @@ class UpdateUserForm(forms.ModelForm):
 class UpdateProfileForm(forms.ModelForm):
     avatar = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
     fname = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 1}))
-    birthday = forms.DateField(widget=forms.DateField())
 
     class Meta:
         model = Profile

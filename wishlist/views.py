@@ -60,19 +60,21 @@ def register(request):
 
 ### Home Page ###
 def index(request):
-    if hasattr(request.user, 'Wishlist'):
-        wishlists = Wishlist.objects.all() #edit later
+    wishlists = Wishlist.objects.all() #edit later
+    curr_user = request.user
+
+    if curr_user.id == None:
         return render(request, "wishlist/index.html", {
             'wishlists': wishlists,
             'banner': 'Friends\' Wishlists',
-            'haslist': True
         })
+
     else:
-        wishlists = Wishlist.objects.all() #edit later
         return render(request, "wishlist/index.html", {
             'wishlists': wishlists,
             'banner': 'Friends\' Wishlists',
-            'haslist': False
+            'wishlist_done': curr_user.wishlist_done,
+            'profile_done': curr_user.profile_done
         })
 #################
 
@@ -132,18 +134,21 @@ def accept_friend_request(request, request_id):
 
 ### Wishlist ###
 @login_required(login_url='login')
-def my_wishlist(request, wishlist_id):
-    wishlist = get_object_or_404(Wishlist, id=wishlist_id)
+def my_wishlist(request):
+    wishlist = request.user.wishlist
+    #wishlist = get_object_or_404(Wishlist, id=wishlist_id)
     if request.method == "POST":
         clicked = request.POST["doit"]
         if clicked == "edit-wishlist":
-            return redirect('edit-wishlist', wishlist_id=wishlist_id)
+            return redirect('edit-wishlist', wishlist_id=wishlist.id)
         else:
             return HttpResponseServerError(f'Unknown button clicked')
     else:
         return render(request, "wishlist/my_wishlist.html", {
             'wishlist': wishlist,
-            'banner': 'My Wishlist'
+            'banner': 'My Wishlist',
+            'wishlist_done': request.user.wishlist_done,
+            'profile_done': request.user.profile_done
         })
 
 @login_required(login_url='login')
@@ -155,14 +160,38 @@ def create_wishlist(request):
         if form.is_valid():
             wishlist = form.save(commit=False)
             wishlist.owner = request.user
+            request.user.wishlist_done = True
+            request.user.save()
             wishlist.save()
             messages.success(request, f'Wishlist created successfully!')
-            return redirect("index") #test
+            return redirect("index") 
         else:
             messages.error(request, 'Problem creating the Wishlist. Details below.')
     else:
         form = WishlistForm()
     return render(request, "wishlist/create_wishlist.html", {'form': form})
+
+@login_required(login_url='login')
+def edit_wishlist(request):
+    wishlist = request.user.wishlist
+    wishlist_form = WishlistForm(request.POST, instance=wishlist)
+    if request.method == 'POST':
+        
+        if wishlist_form.is_valid():
+            wishlist_form.save()
+            #message = 'Your wishlist has been updated successfully'
+            return redirect('my-wishlist')
+        else:
+            return HttpResponseServerError(f'Problem with form')
+    else:
+        wishlist_form = WishlistForm(request.POST, instance=wishlist)
+
+        return render(request, "wishlist/edit_wishlist.html", {
+            'wishlist_form': wishlist_form,
+            'banner': 'Edit Wishlist',
+            'wishlist_done': request.user.wishlist_done,
+            'profile_done': request.user.profile_done
+        })
 ################
 
 ### Secret Santa ###

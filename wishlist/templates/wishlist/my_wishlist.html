@@ -4,6 +4,10 @@
 
 <h2>{{banner}}</h2>
 
+{% if message %}
+    <div>{{ message }}</div>
+{% endif %}
+
 <article>
     {% if wishlist %}
         <div>
@@ -13,7 +17,7 @@
                 <li>Food: {{ wishlist.fav_food }}</li>
                 <li>Drink: {{ wishlist.fav_drink }}</li>
                 <li>Candy: {{ wishlist.fav_candy }}</li>
-                <li>animal: {{ wishlist.fav_animal }}</li>
+                <li>Animal: {{ wishlist.fav_animal }}</li>
                 <li>Movie/TV/Anime: {{ wishlist.fav_media }}</li>
                 <li>Hobby: {{ wishlist.fav_hobby }}</li>
                 <li>Book: {{ wishlist.fav_book }}</li>
@@ -23,8 +27,11 @@
         </div>
         <div>
             <h3>Gift Ideas</h3>
-            <p>{{ wishlist.gift_ideas }}</p>
+            <div>{{ wishlist.gift_ideas }}</div>
         </div>
+        <br>
+        <a href="{% url 'edit-wishlist' %}">Edit Wishlist</a>
+        
     {% else %}
     <div>
         <h3>You currently don't have a wishlist.</h3>

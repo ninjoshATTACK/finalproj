@@ -18,6 +18,7 @@ urlpatterns = [
     path("edit_profile", views.edit_profile, name="edit-profile"),
     path("my_wishlist", views.my_wishlist, name="my-wishlist"),
     path("create_wishlist", views.create_wishlist, name="create-wishlist"),
+    path("edit_wishlist", views.edit_wishlist, name="edit-wishlist"),
 
     path("secret_santa", views.secret_santa, name="secret-santa"),
 ]

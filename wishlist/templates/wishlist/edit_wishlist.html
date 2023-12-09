@@ -1,0 +1,20 @@
+{% extends "wishlist/layout.html" %}
+
+{% block main %}
+    <h2>{{banner}}</h2>
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+
+    <form action="{% url 'edit-wishlist' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ wishlist_form.as_table }}
+        <div>
+            <input type="submit" name="cancel" value="Cancel" formnovalidate="formnovalidate">
+            <input type="reset" name="reset" value="Reset">
+            <input type="submit" name="submit" value="Save Changes">
+        </div>
+    </form>
+
+{% endblock %}

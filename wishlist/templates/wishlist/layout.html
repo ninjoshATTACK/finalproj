@@ -15,7 +15,7 @@
             <nav>
                 <span>
                     {% if user.is_authenticated %}
-                        {% if haslist %}
+                        {% if wishlist_done %}
                             <a href="{% url 'my-wishlist' %}">My Wishlist</a>
                         {% else %}
                             <a href="{% url 'create-wishlist' %}">Create Wishlist</a>
@@ -27,7 +27,11 @@
                 </span>
                 <span>
                     {% if user.is_authenticated %}
-                        <a href="{% url 'edit-profile' %}">My Profile</a>
+                        {% if profile_done %}
+                            <a href="{% url 'edit-profile' %}">My Profile</a>
+                        {% else %}
+                            <a href="#">Finish Profile</a>
+                        {% endif %}
                         <a href="{% url 'add-friend' %}">Add Friends</a>
                         Welcome <strong>{{ user.username }}!</strong>
                         <a href="{% url 'logout' %}">Log Out</a>
