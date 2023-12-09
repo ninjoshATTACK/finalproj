@@ -80,6 +80,32 @@ def index(request):
 
 ### My Profile ###
 @login_required(login_url='login')
+def create_profile(request):
+    if request.method == 'POST':
+        if "cancel" in request.POST: 
+            return redirect('index')
+        form = UpdateProfileForm(request.POST)
+        if form.is_valid():
+            profile = form.save(commit=False)
+            profile.user = request.user
+            request.user.profile_done = True
+            request.user.save()
+            profile.save()
+            messages.success(request, f'Congratulations on finishing your profile!')
+            return redirect("index") 
+        else:
+            messages.error(request, 'Problem creating the Wishlist. Details below.')
+    else:
+        form = UpdateProfileForm()
+
+        return render(request, "wishlist/create_profile.html", {
+            'profile_form': form,
+            'banner': 'Create Profile',
+            'wishlist_done': request.user.wishlist_done,
+            'profile_done': request.user.profile_done
+        })
+
+@login_required(login_url='login')
 def edit_profile(request):
     if request.method == 'POST':
         user_form = UpdateUserForm(request.POST, instance=request.user)
@@ -89,7 +115,7 @@ def edit_profile(request):
             user_form.save()
             profile_form.save()
             message = 'Your profile has been updated successfully'
-            return redirect('my_profile', message)
+            return redirect('index')
         else:
             return HttpResponseServerError(f'Unknown button clicked')
     else:
@@ -99,7 +125,9 @@ def edit_profile(request):
         return render(request, "wishlist/edit_profile.html", {
             'user_form': user_form,
             'profile_form': profile_form,
-            'banner': 'Edit Profile'
+            'banner': 'Edit Profile',
+            'wishlist_done': request.user.wishlist_done,
+            'profile_done': request.user.profile_done
         })
 ##################
 

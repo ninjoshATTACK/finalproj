@@ -8,7 +8,7 @@
     {% endif %}
 
     <div class="row my-3 p-3">
-        <img class="rounded-circle account-img" src="{{ user.profile.avatar.url }} " style="cursor: pointer;"/>
+        <img class="profilepic" src="{{ user.profile.avatar.url }} " style="cursor: pointer;"/>
     </div>
     {% if user_form.errors %}
         <div class="alert alert-danger alert-dismissible" role="alert">
@@ -39,7 +39,6 @@
                         <label class="small mb-1">Change Avatar:</label>
                         {{ profile_form.avatar }}
                     </div>
-                    <label class="small mb-1">Birthday:</label> {{ profile_form.birthday }}
                 </div>
             </div>
             <br><br>

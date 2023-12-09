@@ -1,0 +1,21 @@
+{% extends "wishlist/layout.html" %}
+
+{% block main %}
+
+    <h2>{{ Banner }}</h2>
+
+    {% for m in messages %}
+        <h2 class="{{m.tags}}">{{m}}</h2>
+    {% endfor %}
+
+    <form action="{% url 'create-profile' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ profile_form.as_table }}
+        <div>
+            <input type="submit" name="cancel" value="Cancel" formnovalidate="formnovalidate">
+            <input type="reset" name="reset" value="Reset">
+            <input type="submit" name="submit" value="Finish Profile">
+        </div>
+    </form>
+
+{% endblock %}

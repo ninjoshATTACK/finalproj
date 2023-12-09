@@ -15,6 +15,7 @@ urlpatterns = [
         views.accept_friend_request, name="send-friend-request"),
 
     path("", views.index, name="index"),
+    path("create_profile", views.create_profile, name="create-profile"),
     path("edit_profile", views.edit_profile, name="edit-profile"),
     path("my_wishlist", views.my_wishlist, name="my-wishlist"),
     path("create_wishlist", views.create_wishlist, name="create-wishlist"),

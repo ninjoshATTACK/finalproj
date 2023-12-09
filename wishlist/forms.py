@@ -18,12 +18,14 @@ class UpdateUserForm(forms.ModelForm):
         fields = ['username', 'email']
 
 class UpdateProfileForm(forms.ModelForm):
-    avatar = forms.ImageField(widget=forms.FileInput(attrs={'class': 'form-control-file'}))
-    fname = forms.CharField(widget=forms.Textarea(attrs={'class': 'form-control', 'rows': 1}))
 
     class Meta:
         model = Profile
-        fields = ['avatar', 'fname']
+        fields = ('avatar', 'fname')
+        labels = {
+            'avatar': "Insert photo here",
+            'fname': "First name"
+        }
 
 class WishlistForm(forms.ModelForm):
 
