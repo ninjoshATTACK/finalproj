@@ -1,0 +1,34 @@
+{% extends "wishlist/layout.html" %}
+
+{% block main %}
+    <h2>{{friend.username}}'s {{banner}}</h2>
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+
+    <article>
+        <section>
+            
+            <div>Username: {{ friend.username }}</div>
+            {% if friend.profile_done %}
+                {{ profile.fname }} {{profile.lname}}
+            {% else %}
+                <div>{{ friend.username }} didn't finish their profile yet.</div>
+            {% endif %}
+            <br>
+            
+            
+        </section>
+        <section>
+            <div>
+                <a href="/send_friend_request/{{friend.id}}">
+                    <img class="profilepic" src="{{ profile.avatar.url }} " width="100" style="cursor: pointer;"/>
+                    <div>Send Friend Request</div>
+                </a>
+            </div>
+        </section>
+    </article>
+    
+
+{% endblock %}

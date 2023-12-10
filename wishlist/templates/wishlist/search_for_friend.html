@@ -1,0 +1,48 @@
+{% extends "wishlist/layout.html" %}
+
+{% block main %}
+    <h2>{{banner}}</h2>
+
+    {% if message %}
+        <div>{{ message }}</div>
+    {% endif %}
+
+    <article>
+        {% for friend_request in all_friend_requests %}
+            <section>
+                <h3>
+                    Friend request from {{ friend_request.from_user.username }}
+                    <br>
+                    {% if friend_request.from_user.profile.avatar %}
+                        <img class="profilepic" src="{{ friend_request.from_user.profile.avatar.url }} " width="100" style="cursor: pointer;"/>
+                    {% endif %}
+                    
+                </h3>
+                
+                <a href="/accept_friend_request/{{friend_request.id}}">
+                    accept friend request
+                </a>
+                
+            </section>
+        {% endfor %}
+
+        <section>
+            <form action="{% url 'search-for-friend' %}" method="GET">
+                Search for your friend's username:
+                <input class="search" type="text" name="q" placeholder="Search">
+            </form>
+        </section>
+
+        {% if results %}
+            {% for u in results %}
+            {% if u.username != user.username %}
+                <div>
+                    <a href="{% url 'add-friend' u.id %}">
+                        {{u.username}}
+                    </a>
+                </div>
+            {% endif %}
+            {% endfor %}
+        {% endif %}
+    </article>
+{% endblock %}

@@ -12,6 +12,7 @@ class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     avatar = models.ImageField(default='default.jpg', upload_to='images/profile_images')
     fname = models.CharField(blank=True, max_length=50)
+    lname = models.CharField(blank=True, max_length=50)
 
     def __str__(self):
         return f'{self.user.username}\'s profile'
@@ -44,4 +45,4 @@ class Wishlist(models.Model):
     gift_ideas = models.TextField(max_length=500)
 
     def __str__(self):
-        return f'{self.user.username}\'s wishlist'
+        return f'{self.owner.username}\'s wishlist'

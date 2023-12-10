@@ -9,6 +9,9 @@ class UserCreateForm(UserCreationForm):
         model = User
         fields = ('username', 'email', 'password1', 'password2')
 
+class SearchForm(forms.Form):
+    query = forms.CharField(max_length=100)
+
 class UpdateUserForm(forms.ModelForm):
     username = forms.CharField(max_length=100, required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
     email = forms.EmailField(required=True, widget=forms.TextInput(attrs={'class': 'form-control'}))
@@ -21,10 +24,11 @@ class UpdateProfileForm(forms.ModelForm):
 
     class Meta:
         model = Profile
-        fields = ('avatar', 'fname')
+        fields = ('avatar', 'fname', 'lname')
         labels = {
             'avatar': "Insert photo here",
-            'fname': "First name"
+            'fname': "First name",
+            'lname': "Last name"
         }
 
 class WishlistForm(forms.ModelForm):

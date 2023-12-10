@@ -8,11 +8,12 @@ urlpatterns = [
     path("logout", views.logout_view, name="logout"),
     path("register", views.register, name="register"),
 
-    path("add_friend", views.add_friend, name="add-friend"),
+    path("add_friend/<int:user_id>", views.add_friend, name="add-friend"),
     path("send_friend_request/<int:user_id>", 
         views.send_friend_request, name="send-friend-request"),
-    path("accept_friend_request/<int:user_id>",
+    path("accept_friend_request/<int:request_id>",
         views.accept_friend_request, name="send-friend-request"),
+    path("search_for_friend", views.search_for_friend, name="search-for-friend"),
 
     path("", views.index, name="index"),
     path("create_profile", views.create_profile, name="create-profile"),
