@@ -1,5 +1,6 @@
 from django.urls import path
 from django.views.generic.base import TemplateView
+from django.contrib.auth import views as auth_views
 
 from . import views
 
@@ -7,6 +8,8 @@ urlpatterns = [
     path("login", views.login_view, name="login"),
     path("logout", views.logout_view, name="logout"),
     path("register", views.register, name="register"),
+    path("password_change/", auth_views.PasswordChangeView.as_view(), name="password-change"),
+    path("password_change/done/", auth_views.PasswordChangeDoneView.as_view(), name="password_change_done"),
 
     path("add_friend/<int:user_id>", views.add_friend, name="add-friend"),
     path("send_friend_request/<int:user_id>", 

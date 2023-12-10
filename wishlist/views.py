@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.db import IntegrityError
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse, reverse_lazy
 
 from .models import User, Friend_Request, Profile, Wishlist
 from .forms import UserCreateForm, UpdateProfileForm, UpdateUserForm, WishlistForm, SearchForm
@@ -56,6 +57,10 @@ def register(request):
     else:
         form = UserCreateForm()
         return render(request, "wishlist/register.html", {'form': form})
+    
+from django.contrib.auth import views as auth_views
+class PasswordChangeView(auth_views.PasswordChangeView):
+    success_url = reverse_lazy('index')
 ###################
 
 ### Home Page ###
@@ -116,7 +121,7 @@ def edit_profile(request):
         if user_form.is_valid() and profile_form.is_valid():
             user_form.save()
             profile_form.save()
-            message = 'Your profile has been updated successfully'
+            messages.error(request, 'Your profile has been updated successfully') 
             return redirect('index')
         else:
             return HttpResponseServerError(f'Unknown button clicked')
