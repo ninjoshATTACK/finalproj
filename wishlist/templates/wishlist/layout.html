@@ -7,7 +7,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <title>{% block title %}Wishlist{% endblock %}</title>
         <link rel="stylesheet" type="text/css" href="https://cdn.simplecss.org/simple.css">
-        <link rel="stylesheet" type="text/css" href="{% static 'auctions/uaa490styles.css' %}" >
+        <link rel="stylesheet" type="text/css" href="{% static 'wishlist/finalprojstyles.css' %}" >
 </head>
     <body>
         <header>
@@ -21,7 +21,7 @@
                             <a href="{% url 'create-wishlist' %}">Create Wishlist</a>
                         {% endif %}
                         <a href="{% url 'index' %}">Friends' Wishlists</a>
-                        <a href="{% url 'secret-santa' %}">Secret Santa</a>
+                        <!-- <a href="#">Secret Santa</a> -->
                     {% endif %}
                     
                 </span>

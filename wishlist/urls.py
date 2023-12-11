@@ -31,5 +31,5 @@ urlpatterns = [
     path("edit_wishlist", views.edit_wishlist, name="edit-wishlist"),
     path("contact_us", views.contact_us, name="contact-us"),
 
-    path("secret_santa", views.secret_santa, name="secret-santa"),
+    #path("secret_santa", views.secret_santa, name="secret-santa"),
 ]

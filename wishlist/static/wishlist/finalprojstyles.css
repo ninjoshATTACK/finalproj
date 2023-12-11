@@ -1,0 +1,21 @@
+
+.success { 
+    color:green;
+}
+  
+.errorlist, .error {
+    color: red;
+}
+
+.profile-pic {
+    width: 100px;
+    border-radius: 50%;
+}
+
+.username {
+    text-decoration: none;
+}
+
+ul.favorites {
+    list-style-type: none;
+}

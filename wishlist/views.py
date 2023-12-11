@@ -302,10 +302,13 @@ def edit_wishlist(request):
         })
 ################
 
-### Secret Santa ###
-@login_required(login_url='login')
-def secret_santa(request):
-    pass
+### Secret Santa ### unimplemented
+#@login_required(login_url='login')
+#def secret_santa(request):
+#    if request.method == 'POST':
+#        if SecretSantaForm.is_valid():
+#            # secret santa algorithm to add
+
 ####################
 
 ### Contact Us ###

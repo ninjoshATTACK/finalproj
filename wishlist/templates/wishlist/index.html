@@ -13,9 +13,9 @@
                         <h3>
                             <a href="{% url 'add-friend' wishlist.owner.id %}">
                                 {% if wishlist.owner.profile.avatar %}
-                                    <img src="{{ wishlist.owner.profile.avatar.url }}" width="50px">
+                                    <img class="profile-pic" src="{{ wishlist.owner.profile.avatar.url }}">
                                 {% endif %}
-                                <span>{{ wishlist.owner.username }}</span>
+                                <span class="user-name">{{ wishlist.owner.username }}</span>
                             </a>
                         </h3>
                         <small>

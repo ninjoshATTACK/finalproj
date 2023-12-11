@@ -46,3 +46,22 @@ class Wishlist(models.Model):
 
     def __str__(self):
         return f'{self.owner.username}\'s wishlist'
+    
+""" class AssignedSanta(models.Model):
+    santa = models.ForeignKey(
+        User, related_name='from_user', on_delete=models.CASCADE
+    )
+    santee = models.ForeignKey(
+        User, related_name='to_user', on_delete=models.CASCADE
+    )
+
+class SecretSanta(models.Model):
+    creator = models.OneToOneField(User, on_delete=models.CASCADE)
+    participants = models.ManyToManyField('User', blank=True)
+
+    def assign_santas(self):
+        p = self.participants.all()
+        t = []
+
+        for i in p:
+            pass """
