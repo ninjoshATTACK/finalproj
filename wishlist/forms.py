@@ -49,3 +49,12 @@ class WishlistForm(forms.ModelForm):
             'fav_music': "Favorite music artist", 
             'gift_ideas': "Gift ideas"
         }
+
+from django.contrib.auth.forms import PasswordResetForm
+class MyPasswordResetForm(PasswordResetForm):
+   def is_valid(self):
+       email = self.data["email"]
+       if sum([1 for u in self.get_users(email)]) == 0:
+           self.add_error(None, "Unknown email; try again")
+           return False
+       return super().is_valid()

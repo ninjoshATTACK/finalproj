@@ -307,3 +307,20 @@ def edit_wishlist(request):
 def secret_santa(request):
     pass
 ####################
+
+### Contact Us ###
+def contact_us(request):
+    curr_user = request.user
+
+    if curr_user.id == None:
+        return render(request, "wishlist/contact_us.html", {
+            'banner': 'Contact Us',
+        })
+
+    else:
+        return render(request, "wishlist/contact_us.html", {
+            'banner': 'Contact Us',
+            'wishlist_done': curr_user.wishlist_done,
+            'profile_done': curr_user.profile_done,
+        })
+##################
